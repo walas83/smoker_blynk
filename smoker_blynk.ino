@@ -36,17 +36,31 @@
 
 /* Comment this out to disable prints and save space */
 #define BLYNK_PRINT Serial
+/* Fill-in your Template ID (only if using Blynk.Cloud) */
+#define BLYNK_TEMPLATE_ID "TMPLmKn6VnaM"
+#define BLYNK_DEVICE_NAME "Quickstart Template"
+#define BLYNK_AUTH_TOKEN "cvS82hi14fhO3skezyC7RT1IxDzURGiM"
+#define WIFI_SSID "GPONWIFI_0300"
+#define WIFI_PASS "0000003061"
+
 #include <ESP8266WiFi.h>
 #include <BlynkSimpleEsp8266.h>
 #include <OneWire.h>
 #include <DallasTemperature.h>
 #include <SPI.h>
 #include <Wire.h>
-#include "smoker_credentials.h"
+//#include "smoker_credentials.h"
 
-char auth[] = SMOKER_BLYNK_AUTH_TOKEN;
+
+// You should get Auth Token in the Blynk App.
+// Go to the Project Settings (nut icon).
+char auth[] = BLYNK_AUTH_TOKEN;
+
+// Your WiFi credentials.
+// Set password to "" for open networks.
 char ssid[] = WIFI_SSID;
 char pass[] = WIFI_PASS;
+
 
 //Def
 //#define ONE_WIRE_BUS 0  // DS18B20 on arduino pin2 corresponds to D3 on physical board
@@ -70,8 +84,9 @@ void setup()
 {
   // Debug console
   Serial.begin(9600);
+  
   DS18B20.begin();
-
+  
   Blynk.begin(auth, ssid, pass);
   timer.setInterval(1000L, myTimerEvent);
 }
